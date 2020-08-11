@@ -1,10 +1,12 @@
+INCLUDE = -Iinclude
 LIBS = -lraylib -lopengl32 -lgdi32 -lwinmm
 
-all: main.o 
-	g++ bin/*.o -o bin/test.exe $(LIBS)
+all: main
+	g++ bin/*.o -o bin/test.exe $(INCLUDE) $(LIBS)
+	@echo
 
-main.o: src/main.cpp
-	g++ src/main.cpp -c -o bin/main.o $(LIBS)
+%: src/%.cpp
+	g++ $< -c -o bin/$@.o $(INCLUDE) $(LIBS)
 
 clean:
 	rm bin/*
